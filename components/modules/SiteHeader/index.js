@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { useSetModalContext } from '../../../contexts/modal';
+import { useState } from 'react';
 import LoginModal from '../LoginModal';
 import styles from './SiteHeader.module.css';
 
 export default function SiteHeader() {
-  const setModal = useSetModalContext();
+  const [modalActive, setModalActive] = useState(false);
 
   return (
     <header className={styles.header}>
@@ -14,7 +14,7 @@ export default function SiteHeader() {
         <nav className={styles.rightNav}>
           <ul>
             <li>
-              <button onClick={() => setModal(LoginModal)}>Login</button>
+              <button onClick={() => setModalActive(true)}>Login</button>
               <nav className={styles.dropdown}>
                 <ul>
                   <li>
@@ -48,6 +48,7 @@ export default function SiteHeader() {
           </ul>
         </nav>
       </section>
+      {modalActive && <LoginModal close={() => setModalActive(false)} />}
     </header>
   )
 }
