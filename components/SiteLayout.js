@@ -1,7 +1,10 @@
 import Head from 'next/head';
+import { useModalContext } from '../contexts/modal';
 import SiteHeader from './modules/SiteHeader/';
 
-export default function Layout({ children }) {
+export default function SiteLayout({ children }) {
+  const Modal = useModalContext();
+
   return (
     <div>
       <Head>
@@ -10,6 +13,7 @@ export default function Layout({ children }) {
       </Head>
       <SiteHeader />
       {children}
+      {Modal && Modal}
     </div>
   )
 }

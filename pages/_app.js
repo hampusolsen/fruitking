@@ -1,11 +1,14 @@
 import SiteLayout from '../components/SiteLayout'
+import ModalProvider from '../contexts/modal'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <SiteLayout>
-      <Component {...pageProps} />
-    </SiteLayout>
+    <ModalProvider>
+      <SiteLayout>
+        <Component {...pageProps} />
+      </SiteLayout>
+    </ModalProvider>
   )
 }
 
