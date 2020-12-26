@@ -10,9 +10,20 @@ function objectToFormData(obj) {
 
 class CMSClient {
   CMS_ROOT = 'http://localhost:1337';
+  JWT = '';
+
+  setJWT(jwt) {
+    this.JWT = jwt;
+  }
 
   async get(url = '') {
     const response = await fetch(this.CMS_ROOT + url);
+
+    if (!response.ok) {
+      const { data } = await response.json();
+      throw new Error(data[0].messages[0].message);
+    }
+
     return await response.json();
   }
 
@@ -20,14 +31,25 @@ class CMSClient {
     const response = await fetch(this.CMS_ROOT + url, {
       method: 'post',
       body: objectToFormData(body),
-    });
+    });  
+
+    if (!response.ok) {
+      const { data } = await response.json();
+      throw new Error(data[0].messages[0].message);
+    }
 
     return await response.json();
   }
 
+  // Authentication methods
   async login(credentials) {
-    const response = await this.post('/auth/local', credentials);
-    console.log(response);
+    const user = await this.post('/auth/local', credentials);
+    return user;
+  }
+
+  async register(details) {
+    const user = await this.post('/auth/local/register', details);
+    return user;
   }
 
   async categories() {
