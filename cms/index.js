@@ -1,64 +1,49 @@
-function objectToFormData(obj) {
-  const formData = new FormData();
-
-  Object.entries(obj).forEach(([key, value]) => {
-    formData.append(key, value);
-  });
-
-  return formData;
-}
+import { STRAPI_URL } from '../lib/constants'
+import Fetch from '../lib/Fetch'
 
 class CMSClient {
-  CMS_ROOT = 'http://localhost:1337';
-  JWT = '';
-
-  setJWT(jwt) {
-    this.JWT = jwt;
+  constructor () {
+    Fetch.rootUrl = STRAPI_URL
   }
 
-  async get(url = '') {
-    const response = await fetch(this.CMS_ROOT + url);
-
-    if (!response.ok) {
-      const { data } = await response.json();
-      throw new Error(data[0].messages[0].message);
-    }
-
-    return await response.json();
+  // Utility functions
+  setJWT (jwt) {
+    Fetch.token = jwt
   }
 
-  async post(url = '', body = {}) {
-    const response = await fetch(this.CMS_ROOT + url, {
-      method: 'post',
-      body: objectToFormData(body),
-    });  
-
-    if (!response.ok) {
-      const { data } = await response.json();
-      throw new Error(data[0].messages[0].message);
-    }
-
-    return await response.json();
+  // User methods
+  async login (credentials) {
+    return await Fetch.post('/auth/local', credentials)
   }
 
-  // Authentication methods
-  async login(credentials) {
-    const user = await this.post('/auth/local', credentials);
-    return user;
+  async register (details) {
+    return await Fetch.post('/auth/local/register', details)
   }
 
-  async register(details) {
-    const user = await this.post('/auth/local/register', details);
-    return user;
+  // Article methods
+  async articles () {
+    return await Fetch.get('/articles')
   }
 
-  async categories() {
-    const response = await this.get('/categories');
-    const data = await response.data.json()
-    return data;
+  // Category methods
+  async categories () {
+    return await Fetch.get('/categories')
+  }
+
+  async category (id) {
+    return await Fetch.get('/categories/' + id)
+  }
+
+  // Products methods
+  async products (query = '') {
+    return await Fetch.get('/products' + query)
+  }
+
+  async productCount () {
+    return await Fetch.get('/products/count')
   }
 }
 
-const CMS = new CMSClient();
+const CMS = new CMSClient()
 
-export default CMS;
+export default CMS

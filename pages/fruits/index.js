@@ -1,4 +1,4 @@
-export default function Fruits() {
+export default function Fruits () {
   return (
     <div>
      fruit hello

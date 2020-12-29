@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import NotificationContext from '../../contexts/notification';
-import styles from './Notification.module.css';
+import { useEffect, useState } from 'react'
+import NotificationContext from '../../contexts/notification'
+import styles from './Notification.module.css'
 
-export default function NotificationProvider({ children }) {
-  const [notification, notify] = useState();
+export default function NotificationProvider ({ children }) {
+  const [notification, notify] = useState()
 
   useEffect(() => {
     if (notification) {

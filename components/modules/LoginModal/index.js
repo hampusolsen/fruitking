@@ -1,42 +1,42 @@
-import { useState } from 'react';
-import CMS from '../../../cms';
-import { useNotify } from '../../../contexts/notification';
-import { useSetUser } from '../../../contexts/user';
-import Modal from '../../ui/Modal';
+import { useState } from 'react'
+import CMS from '../../../cms'
+import { useNotify } from '../../../contexts/notification'
+import { useSetUser } from '../../../contexts/user'
+import Modal from '../../ui/Modal'
 
-const IDENTIFIER = 'identifier';
-const PASSWORD = 'password';
+const IDENTIFIER = 'identifier'
+const PASSWORD = 'password'
 
 const initialFormValues = {
   [IDENTIFIER]: '',
-  [PASSWORD]: '',
-};
+  [PASSWORD]: ''
+}
 
-export default function LoginModal({ close }) {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const setUser = useSetUser();
-  const notify = useNotify();
+export default function LoginModal ({ close }) {
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const setUser = useSetUser()
+  const notify = useNotify()
 
-  function handleChange(e) {
+  function handleChange (e) {
     setFormValues({
       ...formValues,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     })
   }
-  
-  async function handleSubmit(e) {
-    e.preventDefault();
+
+  async function handleSubmit (e) {
+    e.preventDefault()
 
     try {
-      const { jwt, user } = await CMS.login(formValues);
-      CMS.setJWT(jwt);
-      setUser(user);
-      close();
+      const { jwt, user } = await CMS.login(formValues)
+      CMS.setJWT(jwt)
+      setUser(user)
+      close()
     } catch (e) {
       notify({
         type: 'error',
         content: e.message
-      });
+      })
     }
   }
 

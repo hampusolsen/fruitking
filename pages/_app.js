@@ -1,18 +1,29 @@
-import SiteLayout from '../components/SiteLayout';
-import UserProvider from '../contexts/user';
-import NotificationProvider from '../middlewares/Notification';
-import '../styles/globals.css';
+import App from 'next/app'
+import CMS from '../cms'
+import Layout from '../components/Layout'
+import UserProvider from '../contexts/user'
+import NotificationProvider from '../middlewares/Notification'
+import '../styles/globals.css'
+import '../styles/util.css'
+import '../styles/variables.css'
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp ({ Component, pageProps, categories }) {
   return (
     <UserProvider>
       <NotificationProvider>
-        <SiteLayout>
+        <Layout categories={categories}>
           <Component {...pageProps} />
-        </SiteLayout>
+        </Layout>
       </NotificationProvider>
     </UserProvider>
   )
 }
 
-export default MyApp
+MyApp.getInitialProps = async (applicationContext) => {
+  const categories = await CMS.categories()
+  const appProps = await App.getInitialProps(applicationContext)
+
+  appProps.categories = categories
+
+  return { ...appProps }
+}

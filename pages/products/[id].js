@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 
-export default function FruitSpecific () {
+export default function Product () {
   const router = useRouter()
   const { id } = router.query
 
   return (
     <div>
-      specific fruit {id}
+      product {id}
     </div>
   )
 }
