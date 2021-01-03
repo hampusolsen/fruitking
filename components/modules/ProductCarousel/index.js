@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRef } from 'react'
 import ArrowRight from '../../svg/ArrowRight'
 import ProductCard from '../ProductCard'
@@ -41,11 +40,7 @@ export default function ProductCarousel ({ products }) {
       <ul className={styles.carousel} ref={carouselRef}>
         {products.map(product => (
           <li key={product.id} className={styles.article}>
-            <Link href={`/products/${product.id}`}>
-              <a title={product.name}>
-                <ProductCard product={product} size="small" />
-              </a>
-            </Link>
+            <ProductCard product={product} size="small" />
           </li>
         ))}
       </ul>

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import SiteHeader from '../modules/SiteHeader'
 import styles from './Layout.module.css'
 
-export default function SiteLayout ({ children, categories }) {
+export default function Layout ({ children, categories }) {
   return (
     <div>
       <Head>

@@ -6,7 +6,7 @@ export default function Logo () {
   return (
     <section className={styles.wrapper}>
       <Crown />
-      <h1 className={styles.text}>Connoisseur</h1>
+      <span className={styles.text}>Connoisseur</span>
     </section>
   )
 }

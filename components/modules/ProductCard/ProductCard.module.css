@@ -1,12 +1,15 @@
 .article {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.article h1 {
+.article h2 {
   font-size: 1.4rem;
   font-family: var(--subtitle-font);
   margin-bottom: 18px;
+  font-style: normal;
+  font-weight: bold;
 }
 
 .article img {
@@ -17,6 +20,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 
 .article footer svg {
@@ -28,7 +32,7 @@
   border-top: 3px solid var(--secondary-black);
 }
 
-.article:hover h1 {
+.article:hover h2 {
   text-decoration: underline;
 }
 
@@ -37,16 +41,24 @@
   width: 220px;
 }
 
-.small > header,
-.medium > header {
+.small header,
+.medium header {
   position: relative;
 }
 
-.small > header {
-  height: 60%;
+.small h1 {
+  margin-bottom: none;
 }
 
-.small > p {
+.article a {
+  height: 80%;
+}
+
+.article header {
+  height: 80%;
+}
+
+.small p {
   display: none;
 }
 
@@ -54,6 +66,13 @@
   height: 380px;
   width: 260px;
   margin-bottom: 36px;
+}
+
+.medium footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .medium img {
@@ -65,18 +84,14 @@
   filter: contrast(1.2);
 }
 
-.medium > header {
-  height: 60%;
-}
-
-.medium > p {
+.medium p {
   margin-bottom: 24px;
   height: 20%;
   overflow: hidden;
   position: relative;
 }
 
-.medium > p::after {
+.medium p::after {
   content: '';
   position: absolute;
   height: 100%;

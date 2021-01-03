@@ -4,8 +4,6 @@ import { capitalize, pluralize } from '../../lib/strings'
 import styles from './Category.module.css'
 
 export default function Category ({ category }) {
-  console.log(category)
-
   return (
     <>
       <h1 className={styles.title}>{capitalize(pluralize(category.category_name))}</h1>

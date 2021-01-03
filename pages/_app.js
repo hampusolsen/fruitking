@@ -1,8 +1,10 @@
 import App from 'next/app'
 import CMS from '../cms'
 import Layout from '../components/Layout'
+import CartProvider from '../contexts/cart'
 import UserProvider from '../contexts/user'
-import NotificationProvider from '../middlewares/Notification'
+import ModalMiddleware from '../middlewares/Modal'
+import NotificationMiddleware from '../middlewares/Notification'
 import '../styles/globals.css'
 import '../styles/util.css'
 import '../styles/variables.css'
@@ -10,11 +12,15 @@ import '../styles/variables.css'
 export default function MyApp ({ Component, pageProps, categories }) {
   return (
     <UserProvider>
-      <NotificationProvider>
-        <Layout categories={categories}>
-          <Component {...pageProps} />
-        </Layout>
-      </NotificationProvider>
+      <CartProvider>
+        <NotificationMiddleware>
+          <ModalMiddleware>
+            <Layout categories={categories}>
+              <Component {...pageProps} />
+            </Layout>
+          </ModalMiddleware>
+        </NotificationMiddleware>
+      </CartProvider>
     </UserProvider>
   )
 }

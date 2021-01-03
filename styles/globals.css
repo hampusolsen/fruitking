@@ -65,3 +65,19 @@ svg {
   width: 24px;
   height: 24px;
 }
+
+.button--solid {
+  background-color: var(--primary-black);
+  color: white;
+  height: 46px;
+  padding: 0 18px;
+  min-width: 78px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button--solid svg {
+  fill: white;
+  margin-right: 12px;
+}

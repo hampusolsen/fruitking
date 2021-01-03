@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  height: 480px;
+  width: 340px;
+  position: relative;
+}
+
+.list {
+
+}

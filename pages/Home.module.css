@@ -1,0 +1,9 @@
+.articles {
+  display: flex;
+  justify-content: space-between;
+  margin: 56px 0;
+}
+
+.products h1 {
+  margin-bottom: 24px;
+}

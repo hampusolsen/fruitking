@@ -1,0 +1,49 @@
+.wrapper {
+  
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header svg {
+  height: 240px;
+  width: 240px;
+}
+
+.header form,
+.header label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header label {
+  margin-left: 2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: var(--primary-font);
+}
+
+.footer {
+
+}
+
+.details {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.details li {
+  position: relative;
+}
+
+.details li:not(:last-child):after {
+  content: '';
+  height: 1px;
+  width: 100%;
+  background-color: var(--primary-gray);
+  position: absolute;
+  bottom: -10px;
+}

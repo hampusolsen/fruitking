@@ -30,10 +30,10 @@
   flex: 0 0 5%;
 }
 
-.wrapper button:first-child {
+.wrapper > button:first-child {
   transform: rotate(180deg);
 }
 
-.wrapper button:hover svg {
+.wrapper > button:hover svg {
   transform: translateX(8px);
 }

@@ -35,12 +35,25 @@ class CMSClient {
   }
 
   // Products methods
+  async product (id = 1) {
+    return await Fetch.get('/products/' + id)
+  }
+
   async products (query = '') {
     return await Fetch.get('/products' + query)
   }
 
   async productCount () {
     return await Fetch.get('/products/count')
+  }
+
+  async productPaths () {
+    return await Fetch.get('/products/paths')
+  }
+
+  // Order methods
+  async placeOrder (details) {
+    return await Fetch.post('/orders', details)
   }
 }
 

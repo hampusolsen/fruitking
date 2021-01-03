@@ -1,19 +1,23 @@
 /* eslint-disable camelcase */
 import Link from 'next/link'
-import { useState } from 'react'
+import { useCart, useClearCart } from '../../../contexts/cart'
+import { useSetModal } from '../../../contexts/modal'
 import { useSetUser, useUser } from '../../../contexts/user'
 import { pluralize } from '../../../lib/strings'
-import LoginModal from '../LoginModal'
+import CheckoutIcon from '../../svg/Checkout'
+import CartItem from '../CartItem'
 import Logo from '../Logo'
 import styles from './SiteHeader.module.css'
 
 export default function SiteHeader ({ categories }) {
-  const [modalActive, setModalActive] = useState(false)
+  const setModal = useSetModal()
   const user = useUser()
   const setUser = useSetUser()
+  const cart = useCart()
+  const clearCart = useClearCart()
 
   const buttonLabel = user ? 'Logout' : 'Login'
-  const handleLoginOrLogout = () => user ? setUser(undefined) : setModalActive(true)
+  const handleLoginOrLogout = () => user ? setUser(undefined) : setModal('LoginModal')
 
   return (
     <header className={styles.header}>
@@ -49,18 +53,19 @@ export default function SiteHeader ({ categories }) {
           </ul>
         </div>
         <div className="dropdownParent">
-          <Link href="/cart"><a>Cart</a></Link>
-          <ul className="dropdownAlignRight dropdown">
-            <li>fruits</li>
-            <li>fruits</li>
-            <li>fruits</li>
-            <li>fruits</li>
-            <li>fruits</li>
-            <li>vegetable</li>
+          <Link href="/checkout"><a>Cart</a></Link>
+          <ul className={`dropdownAlignRight dropdown ${styles.cart}`}>
+            {cart.length === 0 && <p>Your cart is empty.</p>}
+            {cart.map(product => <CartItem key={product.id} product={product} />)}
+            {cart.length > 0 && (
+              <div>
+                <Link href="/checkout"><a className="button--solid"><CheckoutIcon /> Checkout</a></Link>
+                <button onClick={clearCart}>Clear Cart</button>
+              </div>
+            )}
           </ul>
         </div>
       </nav>
-      {modalActive && <LoginModal close={() => setModalActive(false)} />}
     </header>
   )
 }
